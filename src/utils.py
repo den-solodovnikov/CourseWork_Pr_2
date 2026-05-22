@@ -18,7 +18,7 @@ class Saver(ABC):
 
 
 class JSONSaver(Saver):
-    """ Функция добавления информации о самолете в файл. """
+    """ Класс для добавления и изменения информации о самолете в JSON-файл. """
     file_name: str
 
     def __init__(self, file_name='data_aeroplane.json'):
@@ -37,7 +37,7 @@ class JSONSaver(Saver):
             print(f'Файл пустой или не верный формат: {e}')
         if isinstance(vacancy, list):
             data.extend(vacancy)
-        else:
+        elif isinstance(vacancy, dict):
             data.append(vacancy)
         try:
             with open(self.file_name, 'w', encoding='utf-8') as f:
@@ -79,7 +79,7 @@ class JSONSaver(Saver):
                                     data.remove(item)
                                     print('Запись успешно удалена')
                 else:
-                    print('Записи в файле отсутствуют или не соответстуют формату JSON')
+                    print('Записи в файле отсутствуют или не соответствуют формату JSON')
         except Exception as e:
             print(f'Ошибка записи данных в файл:\n{e}')
 

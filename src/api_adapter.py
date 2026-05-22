@@ -23,7 +23,7 @@ class APIAdapter(Adapter):
         self.aeroplanes = None
 
     def get_coordinates(self, country: str) -> None:
-        """ Функция аолучения координат крайних точек страны, указанной в атрибутах. """
+        """ Функция получения координат крайних точек страны, указанной в атрибутах. """
         # Headers с user-agent - обязательный параметр при запросе к nominatim.openstreetmap.
         # Вы можете использовать любое название вместо test-app/1.0, например просто test-app.
         headers_nominatim = {
