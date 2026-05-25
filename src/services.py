@@ -16,11 +16,11 @@ def get_aeroplanes_by_altitude(aeroplanes: list, altitude_range: str) -> list:
     """ Функция возвращает список самолетов с высотой полета, указанном в диапазоне высот (Пример: 1000 - 5000). """
     numbers = re.findall(r'-?\d+', altitude_range)
     data_filtered = []
-    altitude_lower, altitude_high = 0, 0
     try:
         altitude_lower, altitude_high = float(numbers[0]), float(numbers[1])
     except IndexError as e:
-        print(f'Переданы не верные данные диапазона высоты полета: {e}')
+        print('Не переданы параметры высот')
+        altitude_lower, altitude_high = 0, 0
     for aeroplane in aeroplanes:
         if (isinstance(aeroplane.get('geo_altitude'), float) and
                 altitude_lower <= float(aeroplane.get('geo_altitude')) <= altitude_high):
