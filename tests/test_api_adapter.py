@@ -10,16 +10,17 @@ def test_stock_prices_api_init():
     assert adapter.opensky_url == 'https://opensky-network.org/api/states/all?'
 
 
-# @patch('requests.get')
-# def test_get_coordinates_success(mock_get):
-#     mock_response = Mock()
-#     mock_response.status_code = 200
-#     mock_response.json.return_value = [{'boundingbox': ['50.0', '60.0', '10.0', '20.0']}]
-#     mock_get.return_value = mock_response
+# @patch('APIAdapter.get_coordinates')
+# def test_get_coordinates_success():
+#     # mock_response = Mock()
+#     with patch('src.api_adapter.APIAdapter.get_coordinates') as mock_get:
+#         mock_get.status_code = 200
+#         mock_get.return_value = {}
+#         # mock_get.return_value = mock_response
 #     adapter = APIAdapter()
-#     adapter.get_coordinates('Canada')
-#     assert len(adapter.geo_coordinates) == 4
-#     assert adapter.geo_coordinates == ['50.0', '60.0', '10.0', '20.0']
-#     assert adapter.geo_coordinates[0] == '50.0'
-#     assert adapter.geo_coordinates[2] == '60.0'
-#     mock_response.json.assert_called_once()
+#     # adapter.get_coordinates('Canada')
+#     assert type(adapter.geo_coordinates()) == dict
+#     # assert adapter.geo_coordinates == ['50.0', '60.0', '10.0', '20.0']
+#     # assert adapter.geo_coordinates[0] == '50.0'
+#     # assert adapter.geo_coordinates[2] == '60.0'
+#     # mock_response.json.assert_called_once()
