@@ -28,6 +28,6 @@ from src.utils import JSONSaver
 
 def test_read_json_error():
     # Тестируем поведение при ошибке (например, файл не найден)
-    with pytest.raises(FileNotFoundError) as excinfo:
+    with pytest.raises(FileNotFoundError) as exif:
         open("bad_path.json")
-    assert "bad_path.json" in str(excinfo.value)
+    assert "bad_path.json" in str(exif.value)

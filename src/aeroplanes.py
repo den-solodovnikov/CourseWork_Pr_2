@@ -34,14 +34,18 @@ class Aeroplane(Aeroplanes):
     @classmethod
     def cast_to_object_list(cls, aeroplanes_data: dict) -> list[Any]:
         """ Функция преобразования набора данных в список объектов класса. """
-        aeroplanes_list = aeroplanes_data.get('states')
-        for item in aeroplanes_list:
-            new_aeroplane = cls(
-                code=item[0],
-                callsign=item[1],
-                country_reg=item[2],
-                velocity=item[9],
-                geo_altitude=item[13]
-            )
-            cls.aeroplane_list.append(new_aeroplane.__dict__)
+        try:
+            aeroplanes_list = aeroplanes_data.get('states')
+            cls.aeroplane_list = []
+            for item in aeroplanes_list:
+                new_aeroplane = cls(
+                    code=item[0],
+                    callsign=str(item[1]).strip(),
+                    country_reg=item[2],
+                    velocity=item[9],
+                    geo_altitude=item[13]
+                )
+                cls.aeroplane_list.append(new_aeroplane.__dict__)
+        except Exception as e:
+            pass
         return cls.aeroplane_list

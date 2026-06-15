@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+from numpy.ma.core import empty
 from requests import get
 
 
@@ -44,6 +45,7 @@ class APIAdapter(Adapter):
             else:
                 print(f'Ошибка соединения. Код: {response.status_code}')
         except Exception as e:
+            self.geo_coordinates = None
             print(f'Ошибка: {e}\nКоординаты страны "{country}" не найдены')
 
     def get_aeroplanes(self, country: str) -> None:
@@ -51,6 +53,7 @@ class APIAdapter(Adapter):
         self.get_coordinates(country)
         coordinates = self.geo_coordinates
         if not coordinates:
+            self.aeroplanes = None
             print('Координаты не получены')
         else:
             # Параметры для фильтрации самолетов по их географическим координатам.
@@ -65,6 +68,7 @@ class APIAdapter(Adapter):
                 if response.status_code == 200:
                     self.aeroplanes = response.json()
                 else:
+                    self.aeroplanes = None
                     print('Нет информации о полетах')
             except Exception as e:
                 print(f'Ошибка соединения:\n{e}')
